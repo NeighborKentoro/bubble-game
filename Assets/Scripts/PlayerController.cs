@@ -3,12 +3,26 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField]InputReader input;
+    [SerializeField]float floatDamping = 10f;
     [SerializeField]float flapForce = 10f;
-    [SerializeField]float horizontalForce = 2f;
+    [SerializeField]float jumpForce = 5f;
+    [SerializeField]float horizontalFloatForce = 15f;
+    [SerializeField]float horizontalWalkForce = 5f;
+    [SerializeField]float offsetToGround = 0f;
+    [SerializeField]LayerMask groundLayer;
 
 
     private Rigidbody2D rb;
     private Vector2 moveInput;
+    // public bool BalloonAttached {
+    //     get => isFloating;
+    //     set{
+    //         isFloating = value;
+    //         SetPlayerState(isFloating);
+    //     }
+    // }
+    [SerializeField]private bool isFloating;
+    private bool isGrounded;
 
     void Awake(){
         rb = GetComponent<Rigidbody2D>();
@@ -25,11 +39,20 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        Move(CalculateHorzontalForce());
+        Move(CalculateHorzontalForce());        
+    }
+
+    void OnValidate(){
+        rb = GetComponent<Rigidbody2D>();
+        SetBalloonAttachment(isFloating);
     }
 
     void Move(Vector2 direction){
-        rb.AddForce(horizontalForce * direction);
+        if(isFloating){
+            rb.AddForce(horizontalFloatForce * direction);
+        }else{
+            rb.AddForce(horizontalWalkForce * direction);
+        }
     }
 
     Vector2 CalculateHorzontalForce(){
@@ -37,7 +60,27 @@ public class PlayerController : MonoBehaviour
     }
 
     void OnFlap(bool isPressed){
-        rb.AddForce(flapForce * Vector2.up, ForceMode2D.Impulse);
+        if(isFloating){
+            rb.AddForce(flapForce * Vector2.up, ForceMode2D.Impulse);
+        }else{
+            if(IsGrounded()){
+                rb.AddForce(jumpForce * Vector2.up, ForceMode2D.Impulse);
+            }
+        }
+    }
+
+    void SetBalloonAttachment(bool floating){
+        isFloating = floating;       
+        if(floating){
+            rb.linearDamping = floatDamping;
+        }else{
+            rb.linearDamping = 0f;
+        }
+    }
+
+    bool IsGrounded(){
+        isGrounded = Physics2D.Raycast(transform.position, Vector2.down, offsetToGround + 0.1f, groundLayer);
+        return isGrounded;
     }
 
 }
