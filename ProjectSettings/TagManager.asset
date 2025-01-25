@@ -8,6 +8,7 @@ TagManager:
   - ScoreCanvas
   - EndGameCanvas
   - WinMessage
+  - MenuCanvas
   layers:
   - Default
   - TransparentFX
