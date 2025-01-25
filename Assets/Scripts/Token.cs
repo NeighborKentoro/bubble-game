@@ -2,15 +2,17 @@ using UnityEngine;
 
 public class Token : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        
+        // if player collides with token
+        if (collision.gameObject.layer == 9)
+        {
+            // player scored event
+            EventManager.PlayerScored(collision.gameObject.GetComponent<Player>().GetPlayerId());
+
+            // destroy token
+            Object.Destroy(this.gameObject);
+        }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

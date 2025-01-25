@@ -12,8 +12,9 @@ public class Bubble : MonoBehaviour
         EventManager.bubblePopEvent -= this.Pop;
     }
 
-    public void Pop(int playerId)
+    public void Pop()
     {
-        
+        // destroy balloon
+        Object.Destroy(this.gameObject);
     }
 }
