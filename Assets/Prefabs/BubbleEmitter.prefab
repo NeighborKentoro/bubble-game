@@ -673,7 +673,7 @@ ParticleSystem:
     donutRadius: 0.2
     m_Position: {x: 0, y: 0, z: 0}
     m_Rotation: {x: -90, y: 51.66, z: 0}
-    m_Scale: {x: 1.7878821, y: 0.1887893, z: 0.06673539}
+    m_Scale: {x: 2.7056007, y: 0.1887893, z: 0.06673539}
     placementMode: 0
     m_MeshMaterialIndex: 0
     m_MeshNormalOffset: 0
@@ -871,7 +871,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 10
+      scalar: 7
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -4878,5 +4878,5 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1.0524025, y: 0.70073533}
+  m_Size: {x: 1.37, y: 0.70073533}
   m_EdgeRadius: 0
