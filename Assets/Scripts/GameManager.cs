@@ -21,11 +21,34 @@ public class GameManager : MonoBehaviour
     void OnEnable()
     {
         EventManager.scoreEvent += this.ScorePoint;
+        EventManager.startGameEvent += this.StartGame;
     }
 
     void OnDisable()
     {
         EventManager.scoreEvent -= this.ScorePoint;
+        EventManager.startGameEvent -= this.StartGame;
+    }
+
+    public void StartGame()
+    {
+        // Start game
+
+        // Enable score canvas
+        GameObject.FindGameObjectWithTag("ScoreCanvas").GetComponent<Canvas>().enabled = true;
+
+        // Disable game over and main menu canvases
+        GameObject.FindGameObjectWithTag("EndGameCanvas").GetComponent<Canvas>().enabled = false;
+        GameObject.FindGameObjectWithTag("MenuCanvas").GetComponent<Canvas>().enabled = false;
+
+        // Enable arena objects
+
+        // Spawn players
+
+
+        // Spawn token
+
+
     }
 
     public void ScorePoint(int playerId)
