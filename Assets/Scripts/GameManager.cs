@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
@@ -12,6 +13,9 @@ public class GameManager : MonoBehaviour
     {
         points.Add(new Point(1));
         points.Add(new Point(2));
+
+        GameObject.FindGameObjectWithTag("EndGameCanvas").GetComponent<Canvas>().enabled = false;
+
     }
 
     void OnEnable()
@@ -33,8 +37,20 @@ public class GameManager : MonoBehaviour
         // evaluate win condition
         if (p.GetScore() >= 3)
         {
-            // playerId wins
-            Debug.Log("player" + playerId + " wins");
+            Debug.Log("Game over");
+
+            // deactivate score canvas
+            GameObject.FindGameObjectWithTag("ScoreCanvas").GetComponent<Canvas>().enabled = false;
+
+            // activate end game canvas
+            //GameObject endGameCanvas = GameObject.FindGameObjectWithTag("EndGameCanvas");
+            //endGameCanvas.SetActive(true);
+            GameObject.FindGameObjectWithTag("EndGameCanvas").GetComponent<Canvas>().enabled = true;
+
+            GameObject winMessage = GameObject.FindGameObjectWithTag("WinMessage");
+
+            winMessage.GetComponent<TMP_Text>().text = "Player " + p.GetPlayerId() + " Wins!";
+            //winMessage.GetComponent<TMP_Text>().text = "Player Wins!";
         } else
         {
             // if not won, spawn new token
