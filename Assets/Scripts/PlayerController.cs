@@ -10,17 +10,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField]float horizontalWalkForce = 5f;
     [SerializeField]float offsetToGround = 0f;
     [SerializeField]LayerMask groundLayer;
-
+    [SerializeField]AnimatorController animController;
 
     private Rigidbody2D rb;
     private Vector2 moveInput;
-    // public bool BalloonAttached {
-    //     get => isFloating;
-    //     set{
-    //         isFloating = value;
-    //         SetPlayerState(isFloating);
-    //     }
-    // }
     [SerializeField]private bool isFloating;
     private bool isGrounded;
 
@@ -48,9 +41,11 @@ public class PlayerController : MonoBehaviour
     }
 
     void Move(Vector2 direction){
+        animController.AnimIsGrounded(!isFloating);
         if(isFloating){
+            animController.AnimFloatdDirection(direction.x);
             rb.AddForce(horizontalFloatForce * direction);
-        }else{
+        }else{            
             rb.AddForce(horizontalWalkForce * direction);
         }
     }
@@ -61,6 +56,7 @@ public class PlayerController : MonoBehaviour
 
     void OnFlap(bool isPressed){
         if(isFloating){
+            animController.AnimBlow();
             rb.AddForce(flapForce * Vector2.up, ForceMode2D.Impulse);
         }else{
             if(IsGrounded()){
