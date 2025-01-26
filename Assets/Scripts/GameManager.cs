@@ -26,6 +26,7 @@ public class GameManager : MonoBehaviour
     private InputReader inputReader2;
     [SerializeField]
     private GameObject tokenSpawnPoint;
+    private GameStatus gameStatus;
 
 
     private void Awake()
@@ -33,6 +34,7 @@ public class GameManager : MonoBehaviour
         points.Add(new Point(1));
         points.Add(new Point(2));
 
+        gameStatus = GameStatus.MENU;
         GameObject.FindGameObjectWithTag("EndGameCanvas").GetComponent<Canvas>().enabled = false;
 
     }
@@ -51,46 +53,57 @@ public class GameManager : MonoBehaviour
 
     public void StartGame()
     {
-        // Start game
-        Debug.Log("start game");
-
-        // Enable score canvas
-        GameObject.FindGameObjectWithTag("ScoreCanvas").GetComponent<Canvas>().enabled = true;
-
-        // Disable game over and main menu canvases
-        GameObject.FindGameObjectWithTag("EndGameCanvas").GetComponent<Canvas>().enabled = false;
-        GameObject.FindGameObjectWithTag("MenuCanvas").GetComponent<Canvas>().enabled = false;
-
-        // Enable arena objects
-        // Generate token locations
-        for(int i = 0; i < numberOfTokenSpawnPoints; i++)
+        if (gameStatus == GameStatus.MENU)
         {
-            float xTokenValue = Random.Range(xLeftLimit, xRightLimit);
-            float yTokenValue = Random.Range(yBottomLimit, yTopLimit);
+            // Start game
+            Debug.Log("start game");
 
-            Debug.Log(xTokenValue + " " + yTokenValue);
+            // Enable score canvas
+            GameObject.FindGameObjectWithTag("ScoreCanvas").GetComponent<Canvas>().enabled = true;
 
-            Instantiate(tokenSpawnPoint, new Vector3(xTokenValue, yTokenValue, 0), Quaternion.identity);
+            // Disable game over and main menu canvases
+            GameObject.FindGameObjectWithTag("EndGameCanvas").GetComponent<Canvas>().enabled = false;
+            GameObject.FindGameObjectWithTag("MenuCanvas").GetComponent<Canvas>().enabled = false;
+
+            GameObject[] buttons = GameObject.FindGameObjectsWithTag("Button");
+            foreach(GameObject button in buttons)
+            {
+                button.SetActive(false);
+            }
+
+            // Enable arena objects
+            // Generate token locations
+            for (int i = 0; i < numberOfTokenSpawnPoints; i++)
+            {
+                float xTokenValue = Random.Range(xLeftLimit, xRightLimit);
+                float yTokenValue = Random.Range(yBottomLimit, yTopLimit);
+
+                Debug.Log(xTokenValue + " " + yTokenValue);
+
+                Instantiate(tokenSpawnPoint, new Vector3(xTokenValue, yTokenValue, 0), Quaternion.identity);
+            }
+
+
+            // Spawn players
+            GameObject[] playerSpawns = GameObject.FindGameObjectsWithTag("PlayerSpawn");
+            foreach (GameObject ps in playerSpawns)
+            {
+                GameObject player = Instantiate(playerPrefab, ps.transform.position, Quaternion.identity);
+                Player playerScript = player.GetComponent<Player>();
+                playerScript.SetPlayerId(ps.GetComponent<PlayerSpawn>().GetPlayerId());
+                PlayerController pc = player.GetComponent<PlayerController>();
+                if (ps.GetComponent<PlayerSpawn>().GetPlayerId() == 1)
+                    pc.SetInputReader(inputReader1);
+                else
+                    pc.SetInputReader(inputReader2);
+            }
+
+
+            // Spawn token
+            StartCoroutine(spawnNewToken());
+
+            gameStatus = GameStatus.IN_PROGRESS;
         }
-
-
-        // Spawn players
-        GameObject[] playerSpawns = GameObject.FindGameObjectsWithTag("PlayerSpawn");
-        foreach(GameObject ps in playerSpawns)
-        {
-            GameObject player = Instantiate(playerPrefab, ps.transform.position, Quaternion.identity);
-            Player playerScript = player.GetComponent<Player>();
-            playerScript.SetPlayerId(ps.GetComponent<PlayerSpawn>().GetPlayerId());
-            PlayerController pc = player.GetComponent<PlayerController>();
-            if (ps.GetComponent<PlayerSpawn>().GetPlayerId() == 1)
-                pc.SetInputReader(inputReader1);
-            else
-                pc.SetInputReader(inputReader2);
-        }
-
-
-        // Spawn token
-        StartCoroutine(spawnNewToken());
     }
 
     public void ScorePoint(int playerId)
@@ -141,6 +154,13 @@ public class GameManager : MonoBehaviour
 
         Instantiate(token, spawn.transform.position, Quaternion.identity);
     }
+}
+
+public enum GameStatus
+{
+    MENU,
+    IN_PROGRESS,
+    GAME_OVER
 }
 
 public class Point

@@ -10,6 +10,7 @@ TagManager:
   - WinMessage
   - MenuCanvas
   - PlayerSpawn
+  - Button
   layers:
   - Default
   - TransparentFX

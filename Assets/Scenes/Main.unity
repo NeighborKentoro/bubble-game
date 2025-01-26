@@ -487,6 +487,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 862574304032400715, guid: 66205ff9aa36a2a4b8c5f759214d6dcb, type: 3}
+      propertyPath: m_TagString
+      value: Button
+      objectReference: {fileID: 0}
     - target: {fileID: 981308238513618520, guid: 66205ff9aa36a2a4b8c5f759214d6dcb, type: 3}
       propertyPath: m_Name
       value: Menu
@@ -530,6 +534,10 @@ PrefabInstance:
     - target: {fileID: 1103317763886598309, guid: 66205ff9aa36a2a4b8c5f759214d6dcb, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4890854748943361708, guid: 66205ff9aa36a2a4b8c5f759214d6dcb, type: 3}
+      propertyPath: m_TagString
+      value: Button
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
