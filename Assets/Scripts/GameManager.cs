@@ -93,6 +93,17 @@ public class GameManager : MonoBehaviour
                 Player playerScript = player.GetComponent<Player>();
                 playerScript.SetPlayerId(ps.GetComponent<PlayerSpawn>().GetPlayerId());
                 PlayerController pc = player.GetComponent<PlayerController>();
+
+                // set player 2 to red
+                if (ps.GetComponent<PlayerSpawn>().GetPlayerId() == 2)
+                {
+                    GameObject fish = player.transform.Find("Fish").gameObject;
+                    fish.GetComponent<SpriteRenderer>().color = new Color(1f, 0.4f, 0.4f);
+                    
+                    GameObject bubble = player.transform.Find("Bubble").gameObject;
+                    bubble.GetComponent<SpriteRenderer>().color = new Color(1f, 0.4f, 0.4f);
+                }
+
                 if (ps.GetComponent<PlayerSpawn>().GetPlayerId() == 1)
                     pc.SetInputReader(inputReader1);
                 else
