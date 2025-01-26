@@ -62,11 +62,18 @@ public class PlayerController : MonoBehaviour
     }
 
     void OnFlap(bool isPressed){
-        if(isFloating){
-            rb.AddForce(flapForce * Vector2.up, ForceMode2D.Impulse);
-        }else{
-            if(IsGrounded()){
-                rb.AddForce(jumpForce * Vector2.up, ForceMode2D.Impulse);
+        if (isPressed)
+        {
+            if (isFloating)
+            {
+                rb.AddForce(flapForce * Vector2.up, ForceMode2D.Impulse);
+            }
+            else
+            {
+                if (IsGrounded())
+                {
+                    rb.AddForce(jumpForce * Vector2.up, ForceMode2D.Impulse);
+                }
             }
         }
     }
