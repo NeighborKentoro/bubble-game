@@ -10,6 +10,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField]float horizontalWalkForce = 5f;
     [SerializeField]float offsetToGround = 0f;
     [SerializeField]LayerMask groundLayer;
+    [SerializeField]
+    private float maxSpeed = 100f;
 
 
     private Rigidbody2D rb;
@@ -48,7 +50,7 @@ public class PlayerController : MonoBehaviour
     }
 
     void Move(Vector2 direction){
-        if(isFloating){
+        if (isFloating){
             rb.AddForce(horizontalFloatForce * direction);
         }else{
             rb.AddForce(horizontalWalkForce * direction);
@@ -60,16 +62,23 @@ public class PlayerController : MonoBehaviour
     }
 
     void OnFlap(bool isPressed){
-        if(isFloating){
-            rb.AddForce(flapForce * Vector2.up, ForceMode2D.Impulse);
-        }else{
-            if(IsGrounded()){
-                rb.AddForce(jumpForce * Vector2.up, ForceMode2D.Impulse);
+        if (isPressed)
+        {
+            if (isFloating)
+            {
+                rb.AddForce(flapForce * Vector2.up, ForceMode2D.Impulse);
+            }
+            else
+            {
+                if (IsGrounded())
+                {
+                    rb.AddForce(jumpForce * Vector2.up, ForceMode2D.Impulse);
+                }
             }
         }
     }
 
-    void SetBalloonAttachment(bool floating){
+    public void SetBalloonAttachment(bool floating){
         isFloating = floating;       
         if(floating){
             rb.linearDamping = floatDamping;
