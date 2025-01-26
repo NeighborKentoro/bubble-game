@@ -85,6 +85,9 @@ public class PlayerController : MonoBehaviour
             collider2d.sharedMaterial = bounceMaterial;
             collider2d.direction = CapsuleDirection2D.Vertical;
             collider2d.size = new Vector2(colliderSizeFoating.x, colliderSizeFoating.y);
+            // reactivate bubble
+            GameObject bubbleChild = this.gameObject.transform.Find("Bubble").gameObject;
+            bubbleChild.SetActive(true);
             rb.linearDamping = floatDamping;
         }else{
             collider2d.sharedMaterial = normalMaterial;

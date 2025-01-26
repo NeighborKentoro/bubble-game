@@ -18,11 +18,13 @@ public class Score : MonoBehaviour
     void OnEnable()
     {
         EventManager.scoreEvent += this.ScorePoint;
+        EventManager.restartGameEvent += this.ResetScore;
     }
 
     void OnDisable()
     {
         EventManager.scoreEvent -= this.ScorePoint;
+        EventManager.restartGameEvent -= this.ResetScore;
     }
 
     void ScorePoint(int playerId)
@@ -32,5 +34,14 @@ public class Score : MonoBehaviour
             this.scoreImages[this.scoreIndex].enabled = true;
             this.scoreIndex++;
         }
+    }
+
+    void ResetScore()
+    {
+        for(int i = 0; i < this.scoreImages.Length; i++)
+        {
+            this.scoreImages[i].enabled = false;
+        }
+        scoreIndex = 0;
     }
 }

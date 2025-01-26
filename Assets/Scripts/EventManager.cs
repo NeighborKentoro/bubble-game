@@ -9,9 +9,13 @@ public class EventManager : MonoBehaviour
     public static event GenericPlayerAction scoreEvent;
     public delegate void GenericEvent();
     public static event GenericEvent flapEvent;
+    public static event GenericEvent splashEvent;
 
     public delegate void StartGameAction();
     public static event StartGameAction startGameEvent;
+
+    public delegate void RestartGameAction();
+    public static event RestartGameAction restartGameEvent;
 
     public static void BubblePop()
     {
@@ -31,5 +35,15 @@ public class EventManager : MonoBehaviour
     public static void Flap()
     {
         flapEvent?.Invoke();
+    }
+
+    public static void Splash()
+    {
+        splashEvent?.Invoke();
+    }
+    
+    public static void RestartGame()
+    {
+        restartGameEvent?.Invoke();
     }
 }

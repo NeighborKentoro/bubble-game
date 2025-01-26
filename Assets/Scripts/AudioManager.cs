@@ -27,6 +27,7 @@ public class AudioManager : MonoBehaviour
         EventManager.bubblePopEvent += this.PlayPopSfx;
         EventManager.scoreEvent += this.PlayScoreSfx;
         EventManager.flapEvent += this.PlayFlapSfx;
+        EventManager.splashEvent += this.PlaySplashSfx;
     }
 
     void OnDisable()
@@ -34,6 +35,7 @@ public class AudioManager : MonoBehaviour
         EventManager.bubblePopEvent -= this.PlayPopSfx;
         EventManager.scoreEvent -= this.PlayScoreSfx;
         EventManager.flapEvent -= this.PlayFlapSfx;
+        EventManager.splashEvent -= this.PlaySplashSfx;
     }
 
     void PlayPopSfx()
@@ -45,6 +47,18 @@ public class AudioManager : MonoBehaviour
             float finalPitch = Random.Range(lowPitch, highPitch);
             this.popSfx.pitch = finalPitch;
             this.popSfx.Play();
+        }
+    }
+
+    void PlaySplashSfx()
+    {
+        if (this.splashSfx != null)
+        {
+            float lowPitch = 0.85f;
+            float highPitch = 1.0f;
+            float finalPitch = Random.Range(lowPitch, highPitch);
+            this.splashSfx.pitch = finalPitch;
+            this.splashSfx.Play();
         }
     }
 

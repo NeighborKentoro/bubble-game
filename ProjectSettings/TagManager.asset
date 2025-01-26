@@ -11,6 +11,7 @@ TagManager:
   - MenuCanvas
   - PlayerSpawn
   - Button
+  - Token
   layers:
   - Default
   - TransparentFX

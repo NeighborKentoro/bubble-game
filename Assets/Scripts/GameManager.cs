@@ -53,7 +53,7 @@ public class GameManager : MonoBehaviour
 
     public void StartGame()
     {
-        if (gameStatus == GameStatus.MENU)
+        if (gameStatus == GameStatus.MENU || gameStatus == GameStatus.GAME_OVER)
         {
             // Start game
             Debug.Log("start game");
@@ -116,13 +116,12 @@ public class GameManager : MonoBehaviour
         if (p.GetScore() >= 3)
         {
             Debug.Log("Game over");
+            this.gameStatus = GameStatus.GAME_OVER;
 
             // deactivate score canvas
             GameObject.FindGameObjectWithTag("ScoreCanvas").GetComponent<Canvas>().enabled = false;
 
             // activate end game canvas
-            //GameObject endGameCanvas = GameObject.FindGameObjectWithTag("EndGameCanvas");
-            //endGameCanvas.SetActive(true);
             GameObject.FindGameObjectWithTag("EndGameCanvas").GetComponent<Canvas>().enabled = true;
 
             GameObject winMessage = GameObject.FindGameObjectWithTag("WinMessage");
@@ -153,6 +152,41 @@ public class GameManager : MonoBehaviour
         Debug.Log("Spawning new token");
 
         Instantiate(token, spawn.transform.position, Quaternion.identity);
+    }
+
+    public void replayGame()
+    {
+        // reset scene
+        EventManager.RestartGame();
+
+        // delete players
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+        foreach(GameObject p in players)
+        {
+            Object.Destroy(p);
+        }
+
+        // delete tokens
+        GameObject[] tokens = GameObject.FindGameObjectsWithTag("Token");
+        foreach(GameObject t in tokens)
+        {
+            Object.Destroy(t);
+        }
+
+        // delete token spawns
+        GameObject[] tokenSpawns = GameObject.FindGameObjectsWithTag("Spawn");
+        foreach (GameObject t in tokenSpawns)
+        {
+            Object.Destroy(t);
+        }
+
+        // reset scores
+        foreach(Point p in this.points)
+        {
+            p.resetScore();
+        }
+
+        StartGame();
     }
 }
 
@@ -187,5 +221,10 @@ public class Point
     public void incrementScore()
     {
         score++;
+    }
+
+    public void resetScore()
+    {
+        score = 0;
     }
 }
