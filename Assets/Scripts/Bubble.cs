@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class Bubble : MonoBehaviour
 {
+    [SerializeField]GameObject bubble;
+    [SerializeField]PlayerController playerController;
     void OnEnable()
     {
         EventManager.bubblePopEvent += this.Pop;
@@ -15,6 +17,8 @@ public class Bubble : MonoBehaviour
     public void Pop()
     {
         // destroy balloon
-        Object.Destroy(this.gameObject);
+        playerController.SetBalloonAttachment(false);
+        bubble.SetActive(false);
+        //Object.Destroy(this.gameObject);
     }
 }

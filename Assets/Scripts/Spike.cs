@@ -19,8 +19,8 @@ public class Spike : MonoBehaviour
         // bubble has collided with spike (7 is bubble layer)
         if (collision.collider.gameObject.layer == 7)
         {
-            // trigger bubble pop event
-            collision.gameObject.GetComponent<Bubble>().Pop();
+            // trigger bubble pop event            
+            collision.collider.gameObject.GetComponent<Bubble>().Pop();
         }
     }
 }
