@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -156,37 +157,38 @@ public class GameManager : MonoBehaviour
 
     public void replayGame()
     {
-        // reset scene
-        EventManager.RestartGame();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        //// reset scene
+        //EventManager.RestartGame();
 
-        // delete players
-        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
-        foreach(GameObject p in players)
-        {
-            Object.Destroy(p);
-        }
+        //// delete players
+        //GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+        //foreach(GameObject p in players)
+        //{
+        //    Object.Destroy(p);
+        //}
 
-        // delete tokens
-        GameObject[] tokens = GameObject.FindGameObjectsWithTag("Token");
-        foreach(GameObject t in tokens)
-        {
-            Object.Destroy(t);
-        }
+        //// delete tokens
+        //GameObject[] tokens = GameObject.FindGameObjectsWithTag("Token");
+        //foreach(GameObject t in tokens)
+        //{
+        //    Object.Destroy(t);
+        //}
 
-        // delete token spawns
-        GameObject[] tokenSpawns = GameObject.FindGameObjectsWithTag("Spawn");
-        foreach (GameObject t in tokenSpawns)
-        {
-            Object.Destroy(t);
-        }
+        //// delete token spawns
+        //GameObject[] tokenSpawns = GameObject.FindGameObjectsWithTag("Spawn");
+        //foreach (GameObject t in tokenSpawns)
+        //{
+        //    Object.Destroy(t);
+        //}
 
-        // reset scores
-        foreach(Point p in this.points)
-        {
-            p.resetScore();
-        }
+        //// reset scores
+        //foreach(Point p in this.points)
+        //{
+        //    p.resetScore();
+        //}
 
-        StartGame();
+        //StartGame();
     }
 }
 
