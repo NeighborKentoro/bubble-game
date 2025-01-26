@@ -34,7 +34,7 @@ public class InputReader : ScriptableObject, IPlayerActions, IInputReader, IOnPl
 
     public void OnFlap(InputAction.CallbackContext context)
     {
-        switch(context.phase){
+        switch (context.phase){
             case InputActionPhase.Started:
                 Flap.Invoke(true);
                 break;

@@ -55,17 +55,24 @@ public class PlayerController : MonoBehaviour
     }
 
     void OnFlap(bool isPressed){
-        if(isFloating){
-            animController.AnimBlow();
-            rb.AddForce(flapForce * Vector2.up, ForceMode2D.Impulse);
-        }else{
-            if(IsGrounded()){
-                rb.AddForce(jumpForce * Vector2.up, ForceMode2D.Impulse);
+        if (isPressed)
+        {
+            if (isFloating)
+            {
+                animController.AnimBlow();
+                rb.AddForce(flapForce * Vector2.up, ForceMode2D.Impulse);
+            }
+            else
+            {
+                if (IsGrounded())
+                {
+                    rb.AddForce(jumpForce * Vector2.up, ForceMode2D.Impulse);
+                }
             }
         }
     }
 
-    void SetBalloonAttachment(bool floating){
+    public void SetBalloonAttachment(bool floating){
         isFloating = floating;       
         if(floating){
             rb.linearDamping = floatDamping;
