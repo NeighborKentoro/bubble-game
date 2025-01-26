@@ -19,6 +19,7 @@ public class Bubble : MonoBehaviour
         // destroy balloon
         playerController.SetBalloonAttachment(false);
         bubble.SetActive(false);
+        
         //Object.Destroy(this.gameObject);
     }
 }
