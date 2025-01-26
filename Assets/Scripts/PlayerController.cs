@@ -83,4 +83,9 @@ public class PlayerController : MonoBehaviour
         return isGrounded;
     }
 
+    public void SetInputReader(InputReader inputReader)
+    {
+        input = inputReader;
+    }
+
 }

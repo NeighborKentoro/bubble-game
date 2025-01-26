@@ -8,6 +8,25 @@ public class GameManager : MonoBehaviour
     private List<Point> points = new List<Point>();
     [SerializeField]
     private GameObject token;
+    [SerializeField]
+    private GameObject playerPrefab;
+    [SerializeField]
+    private int numberOfTokenSpawnPoints;
+    [SerializeField]
+    private float yBottomLimit = -2.5f;
+    [SerializeField]
+    private float xLeftLimit = -6.5f;
+    [SerializeField]
+    private float yTopLimit = 2.5f;
+    [SerializeField]
+    private float xRightLimit = 6.5f;
+    [SerializeField]
+    private InputReader inputReader1;
+    [SerializeField]
+    private InputReader inputReader2;
+    [SerializeField]
+    private GameObject tokenSpawnPoint;
+
 
     private void Awake()
     {
@@ -33,6 +52,7 @@ public class GameManager : MonoBehaviour
     public void StartGame()
     {
         // Start game
+        Debug.Log("start game");
 
         // Enable score canvas
         GameObject.FindGameObjectWithTag("ScoreCanvas").GetComponent<Canvas>().enabled = true;
@@ -42,13 +62,35 @@ public class GameManager : MonoBehaviour
         GameObject.FindGameObjectWithTag("MenuCanvas").GetComponent<Canvas>().enabled = false;
 
         // Enable arena objects
+        // Generate token locations
+        for(int i = 0; i < numberOfTokenSpawnPoints; i++)
+        {
+            float xTokenValue = Random.Range(xLeftLimit, xRightLimit);
+            float yTokenValue = Random.Range(yBottomLimit, yTopLimit);
+
+            Debug.Log(xTokenValue + " " + yTokenValue);
+
+            Instantiate(tokenSpawnPoint, new Vector3(xTokenValue, yTokenValue, 0), Quaternion.identity);
+        }
+
 
         // Spawn players
+        GameObject[] playerSpawns = GameObject.FindGameObjectsWithTag("PlayerSpawn");
+        foreach(GameObject ps in playerSpawns)
+        {
+            GameObject player = Instantiate(playerPrefab, ps.transform.position, Quaternion.identity);
+            Player playerScript = player.GetComponent<Player>();
+            playerScript.SetPlayerId(ps.GetComponent<PlayerSpawn>().GetPlayerId());
+            PlayerController pc = player.GetComponent<PlayerController>();
+            if (ps.GetComponent<PlayerSpawn>().GetPlayerId() == 1)
+                pc.SetInputReader(inputReader1);
+            else
+                pc.SetInputReader(inputReader2);
+        }
 
 
         // Spawn token
-
-
+        StartCoroutine(spawnNewToken());
     }
 
     public void ScorePoint(int playerId)

@@ -16,6 +16,11 @@ public class Player : MonoBehaviour
         return playerId;
     }
 
+    public void SetPlayerId(int playerId)
+    {
+        this.playerId = playerId;
+    }
+
     // Update is called once per frame
     void Update()
     {

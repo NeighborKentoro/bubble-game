@@ -9,6 +9,7 @@ TagManager:
   - EndGameCanvas
   - WinMessage
   - MenuCanvas
+  - PlayerSpawn
   layers:
   - Default
   - TransparentFX

@@ -45,3 +45,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   token: {fileID: 3572748904632671240, guid: 4739c45ae98b9634782539b0483c078a, type: 3}
+  playerPrefab: {fileID: 6650366119500948523, guid: 8b976c161f28ab843b983660b7f3729c, type: 3}
+  numberOfTokenSpawnPoints: 5
+  yBottomLimit: -2.5
+  xLeftLimit: -6.5
+  yTopLimit: -2.5
+  xRightLimit: -6.5
+  inputReader1: {fileID: 11400000, guid: c7bb787a6a6689d4e96d8a8e5aafb6da, type: 2}
+  inputReader2: {fileID: 11400000, guid: 29f4a21962c956a47901142183b0a247, type: 2}
+  tokenSpawnPoint: {fileID: 3808917119503446224, guid: eff912143bafe7142b0892759708199b, type: 3}
