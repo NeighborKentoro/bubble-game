@@ -35,17 +35,23 @@ public class PlayerController : MonoBehaviour
         input.EnablePlayerActions();        
     }
 
+    void OnDisable(){
+        
+        input.Flap -= OnFlap;
+        input.DisablePlayerActions();
+    }
+
     // Update is called once per frame
     void FixedUpdate()
     {
         Move(CalculateHorzontalForce());        
     }
 
-    void OnValidate(){
-        rb = GetComponent<Rigidbody2D>();
-        collider2d = GetComponent<CapsuleCollider2D>();
-        SetBalloonAttachment(isFloating);
-    }
+    // void OnValidate(){
+    //     rb = GetComponent<Rigidbody2D>();
+    //     collider2d = GetComponent<CapsuleCollider2D>();
+    //     SetBalloonAttachment(isFloating);
+    // }
 
     void Move(Vector2 direction){
         animController.AnimIsGrounded(!isFloating);

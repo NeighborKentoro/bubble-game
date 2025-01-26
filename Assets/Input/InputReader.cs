@@ -6,6 +6,7 @@ using static InputActions;
 public interface IInputReader{
     Vector2 Direction {get; }
     void EnablePlayerActions();
+    void DisablePlayerActions();
 }
 
 public interface IOnPlayerActions{
@@ -30,6 +31,10 @@ public class InputReader : ScriptableObject, IPlayerActions, IInputReader, IOnPl
             inputActions.Player.SetCallbacks(this);
         }
         inputActions.Enable();
+    }
+
+    public virtual void DisablePlayerActions(){
+        inputActions.Disable();
     }
 
     public void OnFlap(InputAction.CallbackContext context)
