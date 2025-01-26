@@ -74,6 +74,7 @@ public class PlayerController : MonoBehaviour
             {
                 animController.AnimBlow();
                 rb.AddForce(flapForce * Vector2.up, ForceMode2D.Impulse);
+                EventManager.Flap();
             }
             else
             {
