@@ -43,6 +43,7 @@ public class SeagullManager : MonoBehaviour
         }
         GameObject temp =Instantiate(seagullPrefab, position, Quaternion.identity);
         temp.GetComponent<Seagull>().ActivateSeagull(dir, true, despawnTimer);
+        EventManager.Seagull();
         return temp;
      }
 }
