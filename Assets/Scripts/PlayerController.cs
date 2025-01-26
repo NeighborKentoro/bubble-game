@@ -75,6 +75,9 @@ public class PlayerController : MonoBehaviour
     public void SetBalloonAttachment(bool floating){
         isFloating = floating;       
         if(floating){
+            // reactivate bubble
+            GameObject bubbleChild = this.gameObject.transform.Find("Bubble").gameObject;
+            bubbleChild.SetActive(true);
             rb.linearDamping = floatDamping;
         }else{
             rb.linearDamping = 0f;
