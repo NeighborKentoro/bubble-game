@@ -1039,6 +1039,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GroundGroup
       objectReference: {fileID: 0}
+    - target: {fileID: 7847854656132849193, guid: b1b814b916dcc1c4c89c6e2c0b603958, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

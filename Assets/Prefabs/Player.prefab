@@ -29,8 +29,8 @@ Transform:
   m_GameObject: {fileID: 2828451130166614053}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.11, z: 0}
-  m_LocalScale: {x: 3, y: 3, z: 3}
+  m_LocalPosition: {x: 0, y: 1.48, z: 0}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 7577021924413289506}
@@ -190,8 +190,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.2, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 7577021924413289506}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -281,11 +281,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7577021924413289506}
-  - component: {fileID: 9123980870902509207}
   - component: {fileID: 5054431839563926258}
   - component: {fileID: 834452428445362979}
   - component: {fileID: 7106744627622484585}
   - component: {fileID: 224380134846646087}
+  - component: {fileID: 801169995367875987}
   m_Layer: 9
   m_Name: Player
   m_TagString: Player
@@ -310,42 +310,6 @@ Transform:
   - {fileID: 6394390785633337423}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!58 &9123980870902509207
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6650366119500948523}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Density: 1
-  m_Material: {fileID: 6200000, guid: a959c46504c6df345a343d9d90364872, type: 2}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_Radius: 0.6
 --- !u!50 &5054431839563926258
 Rigidbody2D:
   serializedVersion: 5
@@ -391,11 +355,15 @@ MonoBehaviour:
   jumpForce: 5
   horizontalFloatForce: 20
   horizontalWalkForce: 10
-  offsetToGround: 0
+  offsetToGround: 0.5
   groundLayer:
     serializedVersion: 2
-    m_Bits: 1024
+    m_Bits: 5120
   animController: {fileID: 224380134846646087}
+  normalMaterial: {fileID: 6200000, guid: a959c46504c6df345a343d9d90364872, type: 2}
+  bounceMaterial: {fileID: 6200000, guid: 72b382b8de2ecac4e91d9c20e9995dbb, type: 2}
+  colliderSizeFoating: {x: 0.6, y: 0.7}
+  colliderSizeGrounded: {x: 1, y: 0.5}
   isFloating: 0
 --- !u!114 &7106744627622484585
 MonoBehaviour:
@@ -423,3 +391,40 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fishAnimator: {fileID: 4047931996947015486}
+--- !u!70 &801169995367875987
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6650366119500948523}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 6200000, guid: a959c46504c6df345a343d9d90364872, type: 2}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0.1}
+  m_Size: {x: 1, y: 0.5}
+  m_Direction: 1
