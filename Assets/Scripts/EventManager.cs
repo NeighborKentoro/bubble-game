@@ -14,6 +14,9 @@ public class EventManager : MonoBehaviour
     public delegate void StartGameAction();
     public static event StartGameAction startGameEvent;
 
+    public delegate void RestartGameAction();
+    public static event RestartGameAction restartGameEvent;
+
     public static void BubblePop()
     {
         bubblePopEvent?.Invoke();
@@ -37,5 +40,10 @@ public class EventManager : MonoBehaviour
     public static void Splash()
     {
         splashEvent?.Invoke();
+    }
+    
+    public static void RestartGame()
+    {
+        restartGameEvent?.Invoke();
     }
 }
