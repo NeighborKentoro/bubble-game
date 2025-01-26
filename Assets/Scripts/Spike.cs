@@ -20,6 +20,7 @@ public class Spike : MonoBehaviour
         if (collision.collider.gameObject.layer == 7)
         {
             // trigger bubble pop event            
+            collision.collider.gameObject.GetComponent<Bubble>().Pop();
             EventManager.BubblePop();
         }
     }
