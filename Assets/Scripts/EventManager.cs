@@ -10,6 +10,7 @@ public class EventManager : MonoBehaviour
     public delegate void GenericEvent();
     public static event GenericEvent flapEvent;
     public static event GenericEvent splashEvent;
+    public static event GenericEvent seagullEvent;
 
     public delegate void StartGameAction();
     public static event StartGameAction startGameEvent;
@@ -45,5 +46,10 @@ public class EventManager : MonoBehaviour
     public static void RestartGame()
     {
         restartGameEvent?.Invoke();
+    }
+
+    public static void Seagull()
+    {
+        seagullEvent?.Invoke();
     }
 }

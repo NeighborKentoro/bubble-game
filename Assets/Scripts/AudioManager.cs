@@ -6,6 +6,7 @@ public class AudioManager : MonoBehaviour
     public AudioSource splashSfx;
     public AudioSource scoredSfx;
     public AudioSource flapSfx;
+    public AudioSource seagullSfx;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -25,6 +26,7 @@ public class AudioManager : MonoBehaviour
         EventManager.scoreEvent += this.PlayScoreSfx;
         EventManager.flapEvent += this.PlayFlapSfx;
         EventManager.splashEvent += this.PlaySplashSfx;
+        EventManager.seagullEvent += this.PlaySeagullSfx;
     }
 
     void OnDisable()
@@ -33,6 +35,7 @@ public class AudioManager : MonoBehaviour
         EventManager.scoreEvent -= this.PlayScoreSfx;
         EventManager.flapEvent -= this.PlayFlapSfx;
         EventManager.splashEvent -= this.PlaySplashSfx;
+        EventManager.seagullEvent -= this.PlaySeagullSfx;
     }
 
     void PlayPopSfx()
@@ -76,6 +79,14 @@ public class AudioManager : MonoBehaviour
             float finalPitch = Random.Range(lowPitch, highPitch);
             this.flapSfx.pitch = finalPitch;
             this.flapSfx.Play();
+        }
+    }
+
+    void PlaySeagullSfx()
+    {
+        if (this.seagullSfx != null)
+        {
+            this.seagullSfx.Play();
         }
     }
 }
