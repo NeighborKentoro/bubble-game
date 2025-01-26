@@ -57,8 +57,6 @@ public class GameManager : MonoBehaviour
         if (gameStatus == GameStatus.MENU || gameStatus == GameStatus.GAME_OVER)
         {
             // Start game
-            Debug.Log("start game");
-
             // Enable score canvas
             GameObject.FindGameObjectWithTag("ScoreCanvas").GetComponent<Canvas>().enabled = true;
 
@@ -78,8 +76,6 @@ public class GameManager : MonoBehaviour
             {
                 float xTokenValue = Random.Range(xLeftLimit, xRightLimit);
                 float yTokenValue = Random.Range(yBottomLimit, yTopLimit);
-
-                Debug.Log(xTokenValue + " " + yTokenValue);
 
                 Instantiate(tokenSpawnPoint, new Vector3(xTokenValue, yTokenValue, 0), Quaternion.identity);
             }
@@ -125,9 +121,8 @@ public class GameManager : MonoBehaviour
         // increment their score
         p.incrementScore();
         // evaluate win condition
-        if (p.GetScore() >= 3)
+        if (p.GetScore() >= 5)
         {
-            Debug.Log("Game over");
             this.gameStatus = GameStatus.GAME_OVER;
 
             // deactivate score canvas
@@ -139,7 +134,6 @@ public class GameManager : MonoBehaviour
             GameObject winMessage = GameObject.FindGameObjectWithTag("WinMessage");
 
             winMessage.GetComponent<TMP_Text>().text = "Player " + p.GetPlayerId() + " Wins!";
-            //winMessage.GetComponent<TMP_Text>().text = "Player Wins!";
         } else
         {
             // if not won, spawn new token
@@ -153,15 +147,10 @@ public class GameManager : MonoBehaviour
 
         GameObject[] spawnPoints = GameObject.FindGameObjectsWithTag("Spawn");
 
-        Debug.Log(spawnPoints.Length);
-
         // pick random spawn point
         int spawnIndex = Random.Range(0, spawnPoints.Length);
 
         GameObject spawn = spawnPoints[spawnIndex];
-
-        // spawn new token there
-        Debug.Log("Spawning new token");
 
         Instantiate(token, spawn.transform.position, Quaternion.identity);
     }
@@ -169,37 +158,6 @@ public class GameManager : MonoBehaviour
     public void replayGame()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        //// reset scene
-        //EventManager.RestartGame();
-
-        //// delete players
-        //GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
-        //foreach(GameObject p in players)
-        //{
-        //    Object.Destroy(p);
-        //}
-
-        //// delete tokens
-        //GameObject[] tokens = GameObject.FindGameObjectsWithTag("Token");
-        //foreach(GameObject t in tokens)
-        //{
-        //    Object.Destroy(t);
-        //}
-
-        //// delete token spawns
-        //GameObject[] tokenSpawns = GameObject.FindGameObjectsWithTag("Spawn");
-        //foreach (GameObject t in tokenSpawns)
-        //{
-        //    Object.Destroy(t);
-        //}
-
-        //// reset scores
-        //foreach(Point p in this.points)
-        //{
-        //    p.resetScore();
-        //}
-
-        //StartGame();
     }
 }
 

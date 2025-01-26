@@ -5,12 +5,6 @@ public class Player : MonoBehaviour
     [SerializeField]
     private int playerId;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
-
     public int GetPlayerId()
     {
         return playerId;
@@ -20,13 +14,6 @@ public class Player : MonoBehaviour
     {
         this.playerId = playerId;
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     private void OnCollisionEnter2D(Collision2D collision)
     {
         // if colliding with opponents bubble
