@@ -5,6 +5,7 @@ public class AudioManager : MonoBehaviour
     public AudioSource popSfx;
     public AudioSource splashSfx;
     public AudioSource scoredSfx;
+    public AudioSource flapSfx;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -17,7 +18,7 @@ public class AudioManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Return))
         {
-            EventManager.BubblePop();
+            PlayFlapSfx();
         }
     }
 
@@ -50,6 +51,18 @@ public class AudioManager : MonoBehaviour
         if (this.scoredSfx != null)
         {
             this.scoredSfx.Play();
+        }
+    }
+
+    void PlayFlapSfx()
+    {
+        if (this.flapSfx != null)
+        {
+            float lowPitch = 0.38f;
+            float highPitch = 0.50f;
+            float finalPitch = Random.Range(lowPitch, highPitch);
+            this.flapSfx.pitch = finalPitch;
+            this.flapSfx.Play();
         }
     }
 }
