@@ -10,6 +10,7 @@ public class SandEdge : MonoBehaviour
             // give player their bubble ("balloon")
             PlayerController pc = collision.gameObject.GetComponent<PlayerController>();
             pc.SetBalloonAttachment(true);
+            EventManager.Splash();
         }
     }
 }
