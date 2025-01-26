@@ -26,12 +26,14 @@ public class AudioManager : MonoBehaviour
     {
         EventManager.bubblePopEvent += this.PlayPopSfx;
         EventManager.scoreEvent += this.PlayScoreSfx;
+        EventManager.flapEvent += this.PlayFlapSfx;
     }
 
     void OnDisable()
     {
         EventManager.bubblePopEvent -= this.PlayPopSfx;
         EventManager.scoreEvent -= this.PlayScoreSfx;
+        EventManager.flapEvent -= this.PlayFlapSfx;
     }
 
     void PlayPopSfx()

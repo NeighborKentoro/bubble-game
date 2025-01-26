@@ -7,6 +7,8 @@ public class EventManager : MonoBehaviour
 
     public delegate void GenericPlayerAction(int playerId);
     public static event GenericPlayerAction scoreEvent;
+    public delegate void GenericEvent();
+    public static event GenericEvent flapEvent;
 
     public delegate void StartGameAction();
     public static event StartGameAction startGameEvent;
@@ -24,5 +26,10 @@ public class EventManager : MonoBehaviour
     public static void StartGame()
     {
         startGameEvent?.Invoke();
+    }
+
+    public static void Flap()
+    {
+        flapEvent?.Invoke();
     }
 }
