@@ -143,7 +143,7 @@ public class GameManager : MonoBehaviour
 
     IEnumerator spawnNewToken()
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(5f);
 
         GameObject[] spawnPoints = GameObject.FindGameObjectsWithTag("Spawn");
 
